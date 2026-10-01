@@ -1,0 +1,27 @@
+[package]
+name = "salt_reverb"
+version = "0.1.0"
+edition = "2021"
+authors = ["Your Name <your@email.com>"]
+license = "GPL-3.0-or-later"
+homepage = "https://youtu.be/dQw4w9WgXcQ"
+description = "A lush fundsp-based reverb"
+
+[workspace]
+members = ["xtask"]
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+nih_plug = { git = "https://github.com/robbert-vdh/nih-plug.git", features = ["assert_process_allocs"] }
+fundsp = "0.18"
+
+[profile.release]
+lto = "thin"
+strip = "symbols"
+
+[profile.profiling]
+inherits = "release"
+debug = true
+strip = "none"
